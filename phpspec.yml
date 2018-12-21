@@ -1,0 +1,6 @@
+suites:
+  default:
+    psr4_prefix:  Eddy\Aker
+    namespace:    Eddy\Aker
+
+formatter.name: pretty

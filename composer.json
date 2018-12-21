@@ -1,0 +1,23 @@
+{
+    "name": "simoneddy/aker",
+    "description": "Basic util for handling JSON files",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Simon Eddy",
+            "email": "simon@simoneddy.com.au"
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "autoload": {
+        "psr-4": {
+            "Eddy\\Aker\\": "src"
+        }
+    },
+    "require": {},
+    "require-dev": {
+        "phpspec/phpspec": "^5.1"
+    }
+}
