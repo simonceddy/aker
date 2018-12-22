@@ -27,7 +27,7 @@ class JsonFileSpec extends ObjectBehavior
     function it_can_set_a_filename()
     {
         $this->setFilename('test');
-        $this->filename()->shouldReturn('test.json');
+        $this->filename()->shouldReturn('test');
     }
 
     function it_returns_contents_when_used_as_a_string()

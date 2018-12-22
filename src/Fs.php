@@ -35,12 +35,35 @@ class Fs
 
     protected function storeFile(FileInterface $file)
     {
+        $filename = $file->filename();
+        $ext = $file->ext();
+        if (null !== $ext
+            && !\preg_match('/('.$ext.')$/', $filename)
+        ) {
+            $filename .= $ext;
+        }
+        if (preg_match('/\//', $filename)) {
+            $dirs = explode('/', $filename);
+            array_pop($dirs);
+            $this->createSubDirs($dirs);
+        }
         try {
             file_put_contents(
-                $this->dir.'/'.$file->filename(), $file->contents()
+                $this->dir.'/'.$filename, $file->contents()
             );
         } catch (\Exception $e) {
             throw $e;
+        }
+    }
+
+    protected function createSubDirs(array $dirs)
+    {
+        $current = $this->dir;
+        foreach ($dirs as $dir) {
+            if (!is_dir($current.'/'.$dir)) {
+                mkdir($current.'/'.$dir);
+            }
+            $current = $current.'/'.$dir;
         }
     }
 

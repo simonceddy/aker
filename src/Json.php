@@ -13,18 +13,18 @@ class Json
         return new \ArrayObject(self::toArray($file));
     }
 
-    public static function encode($contents, $flags = null)
-    {
-        return \json_encode($contents, $flags ?? JSON_PRETTY_PRINT);
-    }
-
-    public static function toJsonFile(string $filename, $contents = null)
+    public static function encode($contents, int $options = null)
     {
         try {
-            $contents = self::encode($contents);
+            $contents = \json_encode($contents, $options ?? JSON_PRETTY_PRINT);
         } catch (\Exception $e) {
             throw $e;
         }
-        return new JsonFile($filename, $contents);
+        return $contents;
+    }
+
+    public static function toFile(string $filename, $contents = null)
+    {
+        return new JsonFile($filename, self::encode($contents));
     }
 }

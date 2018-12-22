@@ -10,4 +10,6 @@ interface FileInterface
     public function setContents(string $contents);
 
     public function contents();
+
+    public function ext();
 }

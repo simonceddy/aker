@@ -33,9 +33,11 @@ class FsSpec extends ObjectBehavior
     /* function it_can_save_a_file_from_file_interface(
         FileInterface $file
     ) {
-        $file->filename()->willReturn('filename.json');
+        $file->filename()->willReturn('filename');
+        $file->ext()->willReturn('.json');
         $file->filename()->shouldBeCalled();
         $file->contents()->shouldBeCalled();
+        $file->ext()->shouldBeCalled();
         $this->save($file);
     } */
 
@@ -50,5 +52,15 @@ class FsSpec extends ObjectBehavior
         $file = $this->load('filename.json');
         $file->shouldBeAnInstanceOf(FileInterface::class);
         $file->filename()->shouldReturn('filename.json');
+    }
+
+    function it_can_create_sub_directories(FileInterface $file)
+    {
+        $file->filename()->willReturn('data/test');
+        $file->ext()->willReturn('.json');
+        $file->filename()->shouldBeCalled();
+        $file->contents()->shouldBeCalled();
+        $file->ext()->shouldBeCalled();
+        $this->save($file)->shouldNotThrow(\Exception::class);
     }
 }

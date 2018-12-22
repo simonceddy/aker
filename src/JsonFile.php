@@ -15,9 +15,6 @@ class JsonFile implements FileInterface
 
     public function setFilename(string $name)
     {
-        if (!preg_match('/(\.json)$/', $name)) {
-            $name .= '.json';
-        }
         $this->filename = $name;
     }
 
@@ -40,5 +37,10 @@ class JsonFile implements FileInterface
     public function __toString()
     {
         return (string) $this->contents;
+    }
+
+    public function ext()
+    {
+        return '.json';
     }
 }
