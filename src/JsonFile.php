@@ -1,7 +1,7 @@
 <?php
 namespace Eddy\Aker;
 
-class JsonFile
+class JsonFile implements FileInterface
 {
     protected $filename;
 
@@ -9,7 +9,8 @@ class JsonFile
 
     public function __construct(string $filename = null, $contents = null)
     {
-
+        null === $filename ?: $this->setFilename($filename);
+        null === $contents ?: $this->setContents($contents);
     }
 
     public function setFilename(string $name)
@@ -36,12 +37,8 @@ class JsonFile
         return $this->contents;
     }
 
-    public function saveTo(string $dir)
+    public function __toString()
     {
-        if (!is_dir($dir)) {
-            throw new \InvalidArgumentException(
-                $dir.' could not be located'
-            );
-        }
+        return (string) $this->contents;
     }
 }

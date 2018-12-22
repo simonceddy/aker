@@ -30,17 +30,25 @@ class FsSpec extends ObjectBehavior
         $this->dir()->shouldBeEqualTo(dirname(__DIR__));
     }
 
-    function it_gets_the_filename_from_the_file_object_when_saving(
+    /* function it_can_save_a_file_from_file_interface(
         FileInterface $file
     ) {
         $file->filename()->willReturn('filename.json');
         $file->filename()->shouldBeCalled();
+        $file->contents()->shouldBeCalled();
         $this->save($file);
-    }
+    } */
 
     function it_throws_logic_exception_when_saving_if_no_filename_is_set(
         FileInterface $file
     ) {
         $this->shouldThrow(\LogicException::class)->duringSave($file);
+    }
+
+    function it_can_load_a_file()
+    {
+        $file = $this->load('filename.json');
+        $file->shouldBeAnInstanceOf(FileInterface::class);
+        $file->filename()->shouldReturn('filename.json');
     }
 }

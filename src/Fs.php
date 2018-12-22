@@ -30,8 +30,41 @@ class Fs
         if (!$file->filename()) {
             throw new \LogicException('No filename is specified.');
         }
-        if (!isset($this->dir)) {
+        $this->storeFile($file);
+    }
 
+    protected function storeFile(FileInterface $file)
+    {
+        try {
+            file_put_contents(
+                $this->dir.'/'.$file->filename(), $file->contents()
+            );
+        } catch (\Exception $e) {
+            throw $e;
         }
+    }
+
+    public function load(string $filename)
+    {
+        if (!preg_match('/(\.json)$/', $filename)) {
+            $filename .= '.json';
+        }
+        $file = $this->readFile($filename);
+        return $file;
+    }
+
+    protected function readFile(string $filename)
+    {
+        if (!file_exists($path = $this->dir.'/'.$filename)) {
+            throw new \InvalidArgumentException(
+                'Could not locate a file at'.$path.'.'
+            );
+        }
+        try {
+            $contents = file_get_contents($path);
+        } catch (\Exception $e) {
+            throw $e;
+        }
+        return new JsonFile($filename, $contents);
     }
 }
