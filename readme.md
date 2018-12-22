@@ -18,7 +18,7 @@ composer require simoneddy/aker
 
 ___
 
-## Basic Use
+## Using Your Aker
 
 ___
 
