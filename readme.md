@@ -49,6 +49,13 @@ var_dump($file->filename()); // (string) 'filename.json'
 var_dump($file->contents()); // (string) 'json string'
 ```
 
+JsonFile objects contain a magic `__toString()` method that returns the same value as `contents()`. This allows an instance of JsonFile to be used as a string:
+
+```php
+$file = new Eddy\Aker\JsonFile('my/json/file', 'json string');
+$decoded = json_decode($file); // returns 'json string'
+```
+
 ___
 
 ### Using the Fs (Filesystem) class
