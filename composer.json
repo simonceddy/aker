@@ -3,6 +3,9 @@
     "description": "Basic util for handling JSON files",
     "type": "library",
     "license": "MIT",
+    "config": {
+        "bin-dir": "bin"
+    },
     "authors": [
         {
             "name": "Simon Eddy",
